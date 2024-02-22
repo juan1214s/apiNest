@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn } from "typeorm"
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, ManyToOne, ManyToMany, OneToMany } from "typeorm"
 import {Profile} from "./profile.entity"
+import { Post } from "src/post/post.entity"
 
 
 @Entity() // indica q va poder convertit las clase en tablas y el nombre de la tabla
@@ -26,4 +27,8 @@ export class User{
     @JoinColumn()//creo la union entre tablas
     profile: Profile //y le digo q crea una columna profile con el id de profile
 
+
+    //relacion es uno a muchos 
+    @OneToMany(() => Post, post => post.author)
+    posts: Post[];
 }

@@ -40,16 +40,17 @@ export class UsersService {
    }
 
    async getUserId(id: number) {//indica q busque la columna id q me estan pasando
-      const resultQuery = await this.userRepository.findOne({
+      const usuarioExiste = await this.userRepository.findOne({
          where: {
             id
-         }
+         },
+         relations : ['posts', 'profile']
       })
 
-      if (!resultQuery) {
+      if (!usuarioExiste) {
          return new HttpException('El usuario q buscas no existe', HttpStatus.NOT_FOUND)
       }
-      return resultQuery
+      return usuarioExiste
    }
 
    async deleteUser(id: number) {
