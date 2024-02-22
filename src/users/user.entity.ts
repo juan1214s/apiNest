@@ -1,6 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm"
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn } from "typeorm"
+import {Profile} from "./profile.entity"
 
-@Entity() // indica q va poder convertit las clase en tablas
+
+@Entity() // indica q va poder convertit las clase en tablas y el nombre de la tabla
 export class User{
 
     @PrimaryGeneratedColumn()//genera el id automatico
@@ -17,5 +19,11 @@ export class User{
 
     @Column({ nullable: true })//indico q el campo no es obligatorio
     activo: boolean
+
+
+    //asi se hace una relacion uno a uno 
+    @OneToOne(()=> Profile)//importo profile
+    @JoinColumn()//creo la union entre tablas
+    profile: Profile //y le digo q crea una columna profile con el id de profile
 
 }

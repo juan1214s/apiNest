@@ -5,6 +5,7 @@ import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from "@nestjs/typeorm"//este modulo simplifica la conexion a la base de datos
 import { User } from './users/user.entity';
 import * as dotenv from 'dotenv';
+import {Profile} from "./users/profile.entity"
 
 dotenv.config()
 
@@ -18,7 +19,7 @@ dotenv.config()
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      entities: [User],//dice q cualquier carpeta de la ruta con la extencion la va cargar automaticamente
+      entities: [User, Profile],//dice q cualquier carpeta de la ruta con la extencion la va cargar automaticamente
       synchronize: true //creo las tablas en codigo y este lo va reflejar en la base de datos
     })
   ],
